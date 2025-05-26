@@ -1,0 +1,71 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Conversor de Moedas
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Conversor de Moedas</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">Valor</ion-label>
+      <ion-input type="number" placeholder="Digite o valor" [(ngModel)]="amount" (ionInput)="convertCurrency()"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">De</ion-label>
+      <ion-select [(ngModel)]="fromCurrency" (ionChange)="convertCurrency()" interface="action-sheet" placeholder="Selecionar Moeda">
+        <ion-select-option *ngFor="let currency of supportedCurrencies" [value]="currency[0]">
+          {{ currency[0] }} - {{ currency[1] }}
+        </ion-select-option>
+      </ion-select>
+       <ion-spinner *ngIf="isLoadingCurrencies" slot="end"></ion-spinner>
+    </ion-item>
+
+    <div class="ion-text-center ion-margin-vertical">
+        <ion-button fill="clear" (click)="swapCurrencies()">
+            <ion-icon name="swap-vertical-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+    </div>
+
+    <ion-item>
+      <ion-label position="stacked">Para</ion-label>
+      <ion-select [(ngModel)]="toCurrency" (ionChange)="convertCurrency()" interface="action-sheet" placeholder="Selecionar Moeda">
+        <ion-select-option *ngFor="let currency of supportedCurrencies" [value]="currency[0]">
+          {{ currency[0] }} - {{ currency[1] }}
+        </ion-select-option>
+      </ion-select>
+       <ion-spinner *ngIf="isLoadingCurrencies" slot="end"></ion-spinner>
+    </ion-item>
+
+  </ion-list>
+
+  <div class="ion-padding-top ion-text-center">
+    <ion-button expand="block" (click)="convertCurrency()" [disabled]="isLoadingRates">
+      <span *ngIf="!isLoadingRates">Converter</span>
+      <ion-spinner *ngIf="isLoadingRates"></ion-spinner>
+    </ion-button>
+  </div>
+
+  <div *ngIf="error" class="ion-padding ion-text-center" color="danger">
+    <ion-note color="danger">{{ error }}</ion-note>
+  </div>
+
+  <div *ngIf="convertedAmount !== null && !isLoadingRates && !error" class="ion-padding ion-text-center result-container">
+    <h2>{{ amount }} {{ fromCurrency }} =</h2>
+    <h1>{{ convertedAmount | number:'1.2-4' }} {{ toCurrency }}</h1>
+    <ion-note>Taxa: 1 {{ fromCurrency }} = {{ exchangeRate | number:'1.4-6' }} {{ toCurrency }}</ion-note>
+  </div>
+
+  <!-- Placeholder for History Button/Link -->
+  <!-- <ion-button expand="block" fill="outline" routerLink="/history">Ver Histórico</ion-button> -->
+
+</ion-content>
+

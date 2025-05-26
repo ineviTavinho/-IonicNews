@@ -1,0 +1,24 @@
+import { bootstrapApplication } from '@angular/platform-browser';
+import { RouteReuseStrategy, provideRouter, withPreloading, PreloadAllModules } from '@angular/router';
+import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalone';
+import { provideHttpClient } from '@angular/common/http';
+import { IonicStorageModule } from '@ionic/storage-angular'; // Import IonicStorageModule
+import { Drivers } from '@ionic/storage'; // Import Drivers
+import { importProvidersFrom } from '@angular/core'; // Import importProvidersFrom
+
+import { routes } from './app/app.routes';
+import { AppComponent } from './app/app.component';
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    provideIonicAngular(),
+    provideRouter(routes, withPreloading(PreloadAllModules)),
+    provideHttpClient(),
+    importProvidersFrom(IonicStorageModule.forRoot({ // Configure IonicStorageModule
+      name: '__ionicNewsDb', // Optional: database name
+      driverOrder: [Drivers.IndexedDB, Drivers.LocalStorage] // Define driver preference
+    }))
+  ],
+});
+
