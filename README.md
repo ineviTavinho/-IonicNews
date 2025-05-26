@@ -27,7 +27,7 @@ Você pode obter o código-fonte deste projeto de duas maneiras:
     cd <NOME_DO_DIRETORIO>
     ```
 2.  **Usando o Arquivo ZIP Fornecido:**
-    *   Baixe o arquivo `ionicnewsapp_codigo_fonte.zip`.
+    *   Baixe o arquivo `ionicnewsapp.zip`.
     *   Descompacte o arquivo em um local de sua preferência.
     *   Navegue até o diretório descompactado (`ionicnewsapp`) através do seu terminal.
 
