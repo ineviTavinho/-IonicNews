@@ -23,7 +23,7 @@ Você pode obter o código-fonte deste projeto de duas maneiras:
 
 1.  **Clonando o Repositório (se disponível em Git):**
     ```bash
-    git clone <URL_DO_REPOSITORIO>
+    git clone https://github.com/ineviTavinho/-IonicNews
     cd <NOME_DO_DIRETORIO>
     ```
 2.  **Usando o Arquivo ZIP Fornecido:**
